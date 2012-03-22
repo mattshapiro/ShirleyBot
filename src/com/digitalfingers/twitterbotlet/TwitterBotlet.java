@@ -16,22 +16,10 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class TwitterBotlet implements ServletContextListener, ServletContextAttributeListener {
 	
-	private class RefreshTask extends TimerTask {
-
-		@Override
-		public void run() {
-			// search for query
-			// validate oauth
-			// loop n query matches
-				// parse match
-				// construct response
-				// update with @reply
-		}
-		
-	}
+	private static int MINUTES_TO_PAUSE=10;
 	
-	Timer timer;
-	TimerTask task;
+	private Timer timer;
+	private TimerTask task;
 	
     /**
      * Default constructor. 
@@ -45,7 +33,7 @@ public class TwitterBotlet implements ServletContextListener, ServletContextAttr
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent event) {
-    	timer.schedule(task, 0, 1000*60*10);
+    	timer.schedule(task, 0, 1000*60*MINUTES_TO_PAUSE);
     }
 
 	/**
