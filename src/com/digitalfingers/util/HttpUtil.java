@@ -12,6 +12,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class HttpUtil {
 
 	public static String getResponseAsString(String url) {
+		// pretty much ripped from the Apache example 
+		// http://hc.apache.org/httpcomponents-client-ga/httpclient/examples/org/apache/http/examples/client/ClientWithResponseHandler.java
 		HttpClient httpclient = new DefaultHttpClient();
 		String responseBody = null;
 		try {
