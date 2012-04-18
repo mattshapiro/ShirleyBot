@@ -16,7 +16,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class TwitterBotlet implements ServletContextListener, ServletContextAttributeListener {
 	
-	private static int MINUTES_TO_PAUSE=10;
+	private static int MINUTES_TO_PAUSE=1;
 	
 	private Timer timer;
 	private TimerTask task;

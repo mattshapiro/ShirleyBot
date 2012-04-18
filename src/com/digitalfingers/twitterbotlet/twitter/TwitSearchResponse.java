@@ -13,8 +13,7 @@ public class TwitSearchResponse {
 		tweets.add(tweet);
 	}
 	
-	public Tweet getTweet(int index) {
-		if(tweets == null) return null;
-		return tweets.get(index);
+	public List <Tweet> getTweets() {
+		return tweets;
 	}
 }
