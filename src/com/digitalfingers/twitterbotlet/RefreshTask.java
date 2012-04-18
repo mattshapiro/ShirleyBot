@@ -23,17 +23,8 @@ public class RefreshTask extends TimerTask {
 			String url = queryBuilder.buildWithTerm("surely");
 			String responseStr = HttpUtil.getResponseAsString(url);
 			
-			JSONObject json = (JSONObject) JSONSerializer.toJSON(responseStr);   
-			JSONArray results = json.getJSONArray("results");
-			TwitSearchResponse response = new TwitSearchResponse();
-			int size = results.size();
-			for(int i = 0; i < size; i++) {
-				JSONObject result = results.getJSONObject(i);
-				Tweet tweet = new Tweet();
-				tweet.user = result.getString("from_user");
-				tweet.message = result.getString("text");
-				response.addTweet(tweet);
-			}
+			parseJSONString(responseStr);
+			
 //	        double coolness = json.getDouble( "coolness" );
 //	        int altitude = json.getInt( "altitude" );
 //	        JSONObject pilot = json.getJSONObject("pilot");
@@ -50,5 +41,20 @@ public class RefreshTask extends TimerTask {
 				// parse match
 				// construct response
 				// update with @reply
+		}
+		
+		public TwitSearchResponse parseJSONString(String toParse) {
+			JSONObject json = (JSONObject) JSONSerializer.toJSON(toParse);   
+			JSONArray results = json.getJSONArray("results");
+			TwitSearchResponse response = new TwitSearchResponse();
+			int size = results.size();
+			for(int i = 0; i < size; i++) {
+				JSONObject result = results.getJSONObject(i);
+				Tweet tweet = new Tweet();
+				tweet.user = result.getString("from_user");
+				tweet.message = result.getString("text");
+				response.addTweet(tweet);
+			}
+			return response;
 		}
 }
